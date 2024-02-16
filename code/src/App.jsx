@@ -1,3 +1,4 @@
+
 import './App.css'
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
@@ -15,6 +16,8 @@ import { Products } from "./pages/Products";
 import { Router } from './Components/Router/Router';
 import { Modal } from './Components/Modal/Modal'
 import { Accordion } from './Components/Accordion/Accordion';
+import Slider from './Components/Slider/Slider'
+
 
 function App() {
 
@@ -58,8 +61,9 @@ function App() {
         <h3>Lorem, ipsum.</h3>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim in molestias nemo fuga hic rem, doloribus praesentium vel explicabo error incidunt beatae placeat esse, id sit eos recusandae molestiae asperiores?</p>
       </Accordion>
-    </>
-  )
-}
+                  <Route path="/Slider" element={<Slider />} />
 
-export default App
+    </>
+  );
+}
+export default App;

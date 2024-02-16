@@ -22,7 +22,7 @@ function App() {
 
       <Button
         text="Click Me"
-        bgColor="red"
+        // bgColor="red"
         action={handleClick}
         sizeW="200px"
         sizeH="30px"

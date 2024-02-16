@@ -1,73 +1,77 @@
-import { useEffect, useState } from "react";
-import style from "./Slider.module.scss";
+import React, { useEffect, useState } from "react";
+import style from "./Slider.module.scss";  
+import image1 from "../../assets/img/flowers.jpg";
+import image2 from "../../assets/img/mountains.jpg";
+import image3 from "../../assets/img/bird.jpg";
+import image4 from "../../assets/img/pink.jpg";
+import image5 from "../../assets/img/avenue.jpg";
 
-const PIXABAY_API_KEY = process.env.REACT_APP_PIXABAY_API_KEY;
-
+// Defining the Slider component
 const Slider = () => {
-  const [images, setImages] = useState(null);
+  // Array containing image paths
+  const images = [image1, image2, image3, image4, image5];
+
+  // State to keep track of the current image index and fade effect
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(false);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        if (!PIXABAY_API_KEY) {
-          console.error("Pixabay API key is not defined.");
-          return;
-        }
+  // Function to navigate to the previous image
+  const goToPreviousImage = () => {
+    setFade(true);
+    setTimeout(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      );
+      setFade(false);
+    }, 1000);
+  };
 
-        const response = await fetch(
-          `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=yellow+flowers&image_type=photo`
+  // Function to navigate to the next image
+  const goToNextImage = () => {
+    setFade(true);
+    setTimeout(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+      setFade(false);
+    }, 1000);
+  };
+
+  // Effect to automatically advance to the next image every 5 seconds
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) =>
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
+        setFade(false);
+      }, 1000);
+    }, 5000);
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch images. Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setImages(data.hits);
-      } catch (error) {
-        console.error('Error fetching images:', error);
-    }
-    };
-
-    fetchImages();
-  }, []);
-
-  useEffect(() => {
-    if (images) {
-      const intervalId = setInterval(() => {
-        setFade(true);
-
-        setTimeout(() => {
-          setCurrentImageIndex((prevIndex) =>
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1
-          );
-
-          setFade(false);
-        }, 1000);
-      }, 5000);
-
-      return () => clearInterval(intervalId);
-    }
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, [images]);
 
+  // Render the Slider component with navigation buttons and image
   return (
-    images ? (
-      <div className={style.sliderContainer}>
-        <div
-          className={`${style.sliderImage} ${fade ? style.fade : ""}`}
-          style={{
-            backgroundImage: `url(${images[currentImageIndex]?.webformatURL})`,
-          }}
-        />
-      </div>
-    ) : (
-      <div>Loading...</div>
-    )
+    <div className={style.sliderContainer}>
+      <button className={style.navigationButton} onClick={goToPreviousImage}>
+        {"<"}
+      </button>
+      {/* Image container with fade effect */}
+      <div
+        className={`${style.sliderImage} ${fade ? style.fade : ""}`}
+        style={{
+          backgroundImage: `url(${images[currentImageIndex]})`,
+        }}
+      />
+      <button className={style.navigationButtonRight} onClick={goToNextImage}>
+        {">"}
+      </button>
+    </div>
   );
 };
 
 export default Slider;
-
 

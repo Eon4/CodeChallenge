@@ -6,7 +6,7 @@ function App() {
 
 
   const handleClick = () => {
-    alert('Button clicked!');
+    alert('Stop that!');
   };
 
   return (

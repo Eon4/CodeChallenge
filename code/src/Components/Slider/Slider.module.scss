@@ -1,0 +1,28 @@
+.sliderContainer {
+    position: relative;
+    height: 864px;
+    width: 100%;
+    overflow: hidden;
+  
+    @media screen and (max-width: 768px) {
+      height: 400px; 
+    }
+  }
+  
+  .sliderImage {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity 1s ease;
+  
+    &.fade {
+      opacity: 0;
+    }
+  
+    @media screen and (max-width: 768px) {
+      height: 100%; 
+    }
+  }
+  

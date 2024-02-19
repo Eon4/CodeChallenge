@@ -1,8 +1,6 @@
+export const Login = () => {
 
-
-export const Login = ()=>{
-
-    return(
-        <h1>Login</h1>
+    return (
+        <h1>Login or sign up</h1>
     )
 }

@@ -1,8 +1,9 @@
 
 
-export const About = ()=>{
+export const About = () => {
 
-    return(
+    return (
         <h1>About</h1>
     )
-}
+
+

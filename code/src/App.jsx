@@ -1,11 +1,3 @@
-
-import './App.css'
-import { Home } from "./pages/Home";
-import { About } from "./pages/About";
-import { Login } from "./pages/Login";
-import { Details } from "./pages/Details";
-import { Products } from "./pages/Products";
-import { Router } from './Components/Router/Router';
 import { useState } from 'react'
 import './App.css'
 import { Home } from "./pages/Home";
@@ -62,7 +54,7 @@ function App() {
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim in molestias nemo fuga hic rem, doloribus praesentium vel explicabo error incidunt beatae placeat esse, id sit eos recusandae molestiae asperiores?</p>
       </Accordion>
       <CookieBanner />
-                  <Route path="/Slider" element={<Slider />} />
+      <Route path="/Slider" element={<Slider />} />
     </>
   );
 }
